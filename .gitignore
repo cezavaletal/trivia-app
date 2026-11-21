@@ -1,0 +1,19 @@
+# Environment Variables
+.env
+!.env.example
+
+# IDEs & Editors
+.idea/
+.vscode/
+*.swp
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build outputs
+target/
+dist/
+node_modules/
+bin/

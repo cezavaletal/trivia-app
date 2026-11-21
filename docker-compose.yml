@@ -1,0 +1,74 @@
+services:
+  db-postgres:
+    image: postgres:16-alpine
+    container_name: trivia-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-trivia_db}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - trivia_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-trivia_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - trivia-network
+
+  backend-api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: trivia-backend-api
+    restart: unless-stopped
+    environment:
+      SERVER_PORT: ${SERVER_PORT:-8080}
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-dev}
+      DB_HOST: db-postgres
+      DB_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB:-trivia_db}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      JWT_SECRET: ${JWT_SECRET:-5f8c1dd032184ce5823e007ec8df6b0ece95dda9809f4793a57168b33d5b6ab1}
+      JWT_EXPIRATION_MS: ${JWT_EXPIRATION_MS:-86400000}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:4200,http://localhost}
+      CORS_ALLOWED_METHODS: ${CORS_ALLOWED_METHODS:-GET,POST,PUT,DELETE,OPTIONS}
+      CORS_ALLOWED_HEADERS: ${CORS_ALLOWED_HEADERS:-Authorization,Content-Type,Accept,Origin,X-Requested-With}
+      CORS_ALLOW_CREDENTIALS: ${CORS_ALLOW_CREDENTIALS:-true}
+      CORS_MAX_AGE: ${CORS_MAX_AGE:-3600}
+    ports:
+      - "${HOST_BACKEND_PORT:-8081}:8080"
+    depends_on:
+      db-postgres:
+        condition: service_healthy
+    networks:
+      - trivia-network
+
+  frontend-web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: trivia-frontend-web
+    restart: unless-stopped
+    ports:
+      - "4200:80"
+      - "80:80"
+    depends_on:
+      - backend-api
+    networks:
+      - trivia-network
+
+volumes:
+  trivia_postgres_data:
+    name: trivia_postgres_data
+    driver: local
+
+networks:
+  trivia-network:
+    name: trivia-network
+    driver: bridge

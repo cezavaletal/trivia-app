@@ -1,0 +1,364 @@
+/* ========================================================
+   TRIVIA ARENA - DESIGN SYSTEM & GLOBAL TOKENS
+   WCAG 2.1 AA/AAA Compliant - Modern Arcade Styling
+   ======================================================== */
+
+:root {
+  /* Escala Neutral Absoluta */
+  --neutral-black: #0B0E14;
+  --neutral-white: #FFFFFF;
+  --neutral-100: #F8FAFC;
+  --neutral-200: #E2E8F0;
+  --neutral-300: #CBD5E1;
+  --neutral-400: #94A3B8;
+  --neutral-500: #64748B;
+  --neutral-600: #475569;
+  --neutral-700: #334155;
+  --neutral-800: #1E293B;
+  --neutral-900: #0F172A;
+  --neutral-950: #070A10;
+
+  /* Colores de Marca y Gamificación */
+  --brand-primary-400: #818CF8;
+  --brand-primary-500: #6366F1;
+  --brand-primary-600: #4F46E5;
+  --brand-secondary-500: #EC4899;
+  --brand-accent-amber: #F59E0B;
+  --brand-accent-cyan: #06B6D4;
+
+  /* Semántica de Juego (Respuestas / Estados) */
+  --game-success: #10B981;
+  --game-success-light: #D1FAE5;
+  --game-success-dark: #064E3B;
+  --game-danger: #EF4444;
+  --game-danger-light: #FEE2E2;
+  --game-danger-dark: #7F1D1D;
+  --game-warning: #F59E0B;
+  --game-warning-light: #FEF3C7;
+  --game-info: #3B82F6;
+
+  /* Tipografía */
+  --font-display: 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Space Grotesk', 'JetBrains Mono', monospace;
+
+  /* Espaciado */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Bordes Redondeados */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Elevaciones */
+  --shadow-elevation-low: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-elevation-mid: 0 8px 16px -2px rgba(0, 0, 0, 0.35);
+  --shadow-elevation-high: 0 16px 32px -4px rgba(0, 0, 0, 0.5);
+
+  /* Glow arcade */
+  --glow-primary: 0 0 20px rgba(99, 102, 241, 0.45);
+  --glow-success: 0 0 24px rgba(16, 185, 129, 0.50);
+  --glow-danger: 0 0 24px rgba(239, 68, 68, 0.50);
+  --glow-streak: 0 0 28px rgba(245, 158, 11, 0.60);
+
+  /* Transiciones */
+  --transition-instant: 80ms cubic-bezier(0, 0, 0.2, 1);
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-bounce: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Default Dark Theme: Night Arena */
+  --bg-main: #0B0E14;
+  --bg-secondary: #0F172A;
+  --surface-card: #161B26;
+  --surface-elevated: #1F2637;
+  --surface-border: #2A344A;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --accent-primary: #6366F1;
+  --accent-gold: #FBBF24;
+  --accent-cyan: #22D3EE;
+
+  /* Answer Button default dark */
+  --btn-answer-bg: #1E2536;
+  --btn-answer-border: #2A364F;
+  --btn-answer-text: #F1F5F9;
+}
+
+/* Light Theme: Daylight Focus */
+[data-theme="light"],
+.theme-light {
+  --bg-main: #F8FAFC;
+  --bg-secondary: #EDF2F7;
+  --surface-card: #FFFFFF;
+  --surface-elevated: #FFFFFF;
+  --surface-border: #CBD5E1;
+  --text-primary: #0F172A;
+  --text-secondary: #334155;
+  --text-muted: #64748B;
+  --accent-primary: #4F46E5;
+  --accent-gold: #D97706;
+  --accent-cyan: #0891B2;
+
+  --shadow-elevation-low: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-elevation-mid: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-elevation-high: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+  --btn-answer-bg: #FFFFFF;
+  --btn-answer-border: #CBD5E1;
+  --btn-answer-text: #0F172A;
+}
+
+/* Resets y Base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: var(--font-body);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  line-height: 1.5;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ========================================================
+   KEYFRAMES & ANIMACIONES DE GAMIFICACIÓN
+   ======================================================== */
+
+@keyframes shake-incorrect {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20%,
+  60% {
+    transform: translateX(-8px);
+  }
+
+  40%,
+  80% {
+    transform: translateX(8px);
+  }
+}
+
+@keyframes pulse-success {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+
+  50% {
+    transform: scale(1.025);
+    box-shadow: 0 0 28px 6px rgba(16, 185, 129, 0.6);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 16px 2px rgba(16, 185, 129, 0.4);
+  }
+}
+
+@keyframes flame-glow {
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 6px #F59E0B);
+    transform: scale(1);
+  }
+
+  50% {
+    filter: drop-shadow(0 0 16px #EF4444);
+    transform: scale(1.08) rotate(-2deg);
+  }
+}
+
+@keyframes timer-warning-pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.85;
+    transform: scale(1.06);
+    color: var(--game-danger);
+  }
+}
+
+@keyframes pulse-pending {
+
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 12px rgba(99, 102, 241, 0.35);
+  }
+
+  50% {
+    opacity: 0.75;
+    box-shadow: 0 0 22px rgba(99, 102, 241, 0.7);
+  }
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  60% {
+    transform: scale(1.03);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-slide-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================================
+   ESTADOS DE BOTÓN DE RESPUESTA
+   ======================================================== */
+
+.answer-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-4) var(--space-5);
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: var(--radius-lg);
+  background-color: var(--btn-answer-bg);
+  border: 2px solid var(--btn-answer-border);
+  color: var(--btn-answer-text);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  transition: all var(--transition-fast);
+  text-align: left;
+  position: relative;
+  user-select: none;
+}
+
+.answer-btn:hover:not(:disabled) {
+  background-color: #263045;
+  border-color: var(--brand-primary-400);
+  color: #FFFFFF;
+  box-shadow: 0 0 14px rgba(129, 140, 248, 0.35);
+  outline: 2px solid var(--brand-primary-400);
+  outline-offset: 2px;
+}
+
+.answer-btn:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+
+.answer-btn--selected {
+  background-color: #312E81 !important;
+  border-color: #A5B4FC !important;
+  color: #EEF2FF !important;
+  animation: pulse-pending 1s infinite ease-in-out;
+}
+
+.answer-btn--correct {
+  animation: pulse-success 450ms var(--transition-bounce) both !important;
+  background-color: var(--game-success-dark) !important;
+  border-color: var(--game-success) !important;
+  color: #ECFDF5 !important;
+  box-shadow: var(--glow-success) !important;
+}
+
+.answer-btn--incorrect {
+  animation: shake-incorrect 350ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both !important;
+  background-color: var(--game-danger-dark) !important;
+  border-color: var(--game-danger) !important;
+  color: #FEF2F2 !important;
+  box-shadow: var(--glow-danger) !important;
+}
+
+.answer-btn--timeout {
+  background-color: #111622 !important;
+  border: 2px dashed #334155 !important;
+  color: #64748B !important;
+  opacity: 0.45 !important;
+  box-shadow: none !important;
+  cursor: not-allowed !important;
+}
+
+.answer-btn:disabled {
+  cursor: default;
+}
+
+/* Reducción de Movimiento */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .answer-btn--incorrect {
+    animation: none !important;
+    border-width: 4px !important;
+  }
+}
